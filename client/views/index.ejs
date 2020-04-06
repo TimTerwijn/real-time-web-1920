@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Foto App</title>
+    <meta name="description" content="An app where you can see pictures">
+    <link rel="stylesheet" href="/css/layer2.css">
+    <link rel="stylesheet" href="/css/layer2.5.css">
+    <link rel="stylesheet" href="/css/layer3.css">
+  </head>
+  <body>
+    <main>
+      <section>
+        <p>Home</p>
+      </section>
+      <section>
+        <a href="/image/<%= lastId %>" class="button left">Terug</a>
+        <a href="/image/<%= nextId %>" class="button right">Volgende</a>
+      </section>
+      <section>
+        <a href="/image/<%= nextId %>">
+          <% images.forEach((image) => { %>
+            <img src="/img/uploaded/<%= image %>" alt="<%= image %>"/>
+          <% }) %>
+        </a>
+      </section>
+      <section>
+        <p id="#imageDescription" class="left"><%= images[0] %></p>
+        <a href="/insert-image" class="button right">Voeg toe</a>
+      </section>
+    </main>
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>
