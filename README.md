@@ -1,62 +1,81 @@
-# Real-Time Web @cmda-minor-web · 2019-2020
+# Foto App
 
-During this course you will learn how to build a **meaningful** real-time application. You will learn techniques to setup an open connection between the client and the server. This will enable you to send data in real-time both ways, at the same time.
+## Task 1.2
+[Task 1.2](/docs/onderzoek.md)
 
-## Goals
-- _Deal with real-time complexity_
-- _Handle real-time client-server interaction_
-- _Handle real-time data management_
-- _Handle multi-user support_
+## Autor
+Tim Terwijn
 
-[Rubric][rubric]
+### Demo:
+I will work with Ngrok, the url for the demo is: ... (I will provide the teacher with my URL during the presentation.)
 
-## Curriculum
+### Description
+With this app you can add pictures of your holiday. Then you can look trough your images as a carousel. The app has to work on multiple browsers, and the core functionalists has to work on all browsers. By first working on the core functionalists in plain html and server side JS, I was able to overcome this requirement pretty easy with progressive enhancement instead of graceful degradation.
 
-### Week 1 - Hello Server
+### Logo
+![layer3](/docs/layer2.5.PNG)
 
-Goal: Build and deploy a unique barebone real-time app  
+### Table of contents
+* [Install guide](#install-guide)  
+* [How to use](#how-to-use)  
+* [Wireflow](#wireflow)  
+* [User experience](#user-experience)  
+* [Difficulties](#difficulties)  
+* [Progressive enhancement](#progressive-enhancement)  
+* [Feature detection](#feature-detection)  
+* [Road map (and feedback)](#Road-map-(and-feedback))  
 
-[Exercises](https://github.com/cmda-minor-web/real-time-web-1920/blob/master/course/week-1.md)    
-[Slides](https://docs.google.com/presentation/d/1Q_2EpEnW53G-DiRYtfp1VRYHdLJYJ7bjoLxAWhGbW-0/edit?usp=sharing)  
+### Install guide
+#### Requirements
+* Clone or download the repository $ git clone https://github.com/TimTerwijn/browser-technologies-1920.git  
+* Open server folder with VSCode.  
+* Open terminal en enter npm install.  
+* Enter npm start in terminal.  
+* Go to http://localhost:3000/ to use the app.  
+
+### How to use
+* Click on an image to see the next image.  
+* Click on the back button to see the previous image.  
+
+### Wireflow
+You can test the wireflow live with the Balsamiq file in the docs folder.  
+  
+Here is an image of that wireflow.  
+![Wireflow](/docs/Wireflow.png)
+
+### User experience
+The user is able to use the keyboard in the application because I made use of anchor elements who are focus able.  
+The can also been used by screen readers because I used alt attributes for my images, also I made use of anchor and p elements.    
+
+### Difficulties
+1. Working serverside was new and confusing for me. I fixed it by making two folders to separate the files.
+2. Putting the code online was quite hard for me, because I did not understand Heroku, I got feedback how to do it, but because of time issues, for the demo I will use something I am familiar with. Ngrok.
+3. Adding images to the server was also quite hard. A lot of tools added the image as a binary. I fixed it with some tools and npm Multer.
+4. The swap image animation was hard, swapping to the next image was easy but previous was hard. Because the image you want to show next has to be under the current image. First I tried too swap the sibling locations but JS was to fast. That is why I added some timers.
 
 
-### Week 2 - Sharing is caring  
+### Progressive enhancement
+I used 4 layers for this application.  
 
-Goal: Store, manipulate and share data between server-client   
+* The first layer is pure functionality without style and scripts. The site looks bad but it works.  
+![layer1](/docs/layer1.PNG)
 
-[Exercises](https://github.com/cmda-minor-web/real-time-web-1920/blob/master/course/week-2.md)    
-[Slides](https://docs.google.com/presentation/d/1p_P-rciWJQ2BMgveOYNTcwEJHh1yxB1-HqKZhiD8kkk/edit?usp=sharing)
+* The second layer is with css for older browsers, so that those users can also see a decent layout.  
+![layer2](/docs/layer2.PNG)
 
+* The second and a half layer is with advanced css for newer browsers. I made use of several flexboxes with the help of a css @support.  
+![layer2.5](/docs/layer2.5.PNG)
 
-### Week 3 - Let’s take this show on the road 
+* The third and last layer is for javascript to add some nice transition when someone presses one of the buttons or image.  
+![layer3](/docs/layer3.PNG)
 
-Goal: Handle data sharing and multi-user support 
+### Feature detection
+I used @support to check if the client could use flexboxes. Also I add a id to the main element with javascript to ensure that I only make use of the layer 3 css if there is javascript.
 
-[Exercises](https://github.com/cmda-minor-web/real-time-web-1920/blob/master/course/week-3.md)  
-[Slides](https://drive.google.com/open?id=19GE6r1jha3gX-uhQI0NIv09klTT45BihuELqZSEa2_8)
-
-> If you're seeing this message on a forked repo, it means one of our students hasn't changed the description yet 😈
-
-<!-- Add a link to your live demo in Github Pages 🌐-->
-
-<!-- ☝️ replace this description with a description of your own work -->
-
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
-
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
-
-<!-- Maybe a table of contents here? 📚 -->
-
-<!-- How about a section that describes how to install this project? 🤓 -->
-
-<!-- ...but how does one use this project? What are its features 🤔 -->
-
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-
-<!-- This would be a good place for your data life cycle ♻️-->
-
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
-
-<!-- How about a license here? 📜  -->
-
-[rubric]: https://docs.google.com/spreadsheets/d/e/2PACX-1vSd1I4ma8R5mtVMyrbp6PA2qEInWiOialK9Fr2orD3afUBqOyvTg_JaQZ6-P4YGURI-eA7PoHT8TRge/pubhtml
+### Road map (and feedback)
+* ~~Work on add image function.~~
+* ~~Arrow buttons to navigate trough images.~~
+* Enhancment to Preview images on add image.
+* Style browse button on add image.
+* Navigate the images with beads.
+* Keep images in scale
