@@ -1,22 +1,19 @@
-const express = require('express');
-const routes = require('./server/Routes.js');
-const app = express();
+var app = require('express')();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 
-const port = 3000;
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '/client/views/index.html');
+});
 
-// Tell the views engine/ejs where the template files are stored (Settingname, value)
-app.set('views', 'client/views');
+io.on('connection', function(socket){
+    socket.broadcast.emit('hi');
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
+        console.log('message: ' + msg);
+    });
+});
 
-// Tell express to use a 'static' folder
-app.use(express.static('client/static'));
-
-// Link the templating engine to the express app
-app.set('view engine', 'ejs');
-
-app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
-
-// ROUTES!!!
-routes.set(app);
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});
