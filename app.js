@@ -1,9 +1,16 @@
-const express = require('express')
+const express = require('express');
 var app = express();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
 
-app.use(express.static('client/public'))
+//set port listener 
+const PORT = process.env.PORT || 3000;
+var server = app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
+
+//set public folder
+app.use(express.static('client/public'));
+
+var io = require('socket.io').listen(server);
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/client/views/index.html');
@@ -17,6 +24,3 @@ io.on('connection', function(socket){
     });
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
