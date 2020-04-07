@@ -2,6 +2,10 @@ import {checkKey} from "./modules/controller.js";
 
 const socket = io();
 
+function init(){
+    login();
+}
+
 $(function () {
     $('form').submit(function(e){
         e.preventDefault(); // prevents page reloading
@@ -15,11 +19,12 @@ $(function () {
         "left" : left
         }
 
-        socket.emit('new-data', data);
+        socket.emit('client-message', data);
         $('#m').val('');
         return false;
     });
-    socket.on('new-data', function(data){
+
+    socket.on('client-message', function(data){
         const msg = data.message;
         const left = data.left;
 
@@ -35,7 +40,39 @@ $(function () {
 
         messages.insertAdjacentHTML("beforeend", html);
     });
+
+    socket.on('server-message', function(message){
+        //show message
+        const messages = document.getElementById("messages");
+        const html = `
+            <li>
+                <div class="message">
+                   ${message} 
+                </div>
+            </li>
+        `;
+
+        messages.insertAdjacentHTML("beforeend", html);
+    });
+
+    socket.on('store-id', function(id){        
+        localStorage.setItem('id', id);
+    });    
 });
+
+function login(){
+    const id = localStorage.getItem('id');
+    if(id == null){
+        createAccount();
+    }else{
+        socket.emit('login', id);
+    }
+}
+
+function createAccount(){
+    const username = prompt("Please enter your name", "Harry Potter");
+    socket.emit('create-account', username);
+}
 
 export function onKeyLeft(){
     //move 
@@ -64,3 +101,5 @@ export function onKeyRight(){
     console.log(left)
     form.style.left = left;
 }
+
+init();
