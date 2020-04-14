@@ -26,6 +26,9 @@ I want to make a space invader versus game for two players.
 * If you write something now the text in the chat is also on this position for everyone.
 
 ### Roadmap
+* ~Demo the app online~
+* Work on readme (Data life cycle, real-time events, and APi)
+* Implement real time functions (space invaders)
 * Make use of an API
-* Use a database
+* Make use a database
 * Socket IO rooms so users can play together
