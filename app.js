@@ -1,8 +1,18 @@
+//set libaries
 const express = require('express');
-const api = require("./server/Api.js");
+const app = express();
+const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-const app = express();
+//set modules
+const api = require("./server/Api.js");
+
+//set public folder
+app.use(express.static('client/public'));
+
+//set views folder
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/client/views'));
 
 //set port listener 
 const PORT = process.env.PORT || 3000;
@@ -10,17 +20,19 @@ const server = app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
 
-//set public folder
-app.use(express.static('client/public'));
-
+//set socket IO
 const io = require('socket.io').listen(server);
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/client/views/index.html');
-});
+//routes
+app.get('/', function(req, res){ 
+    res.render("index", {"background":api.getImage()}) 
+}); 
 
-let counter = 0;
+
+//all users
 const users = {};
+
+//socketIO
 io.on('connection', function(socket){
     
     const id = uuidv4();//random string

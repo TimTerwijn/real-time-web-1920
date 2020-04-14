@@ -25,9 +25,11 @@ function init(){
 
     
     //get and save space image of the day
-    nasaObject = fetch(urlFinal)
-        .then(res => res.json())
-        .then(json => json);
+    fetch(urlFinal)
+    .then(res => res.json())
+    .then(json => {
+        nasaObject = json;
+    });
 }
 
 function getTitle(){
