@@ -4,10 +4,7 @@
 Tim Terwijn
 
 ### Week1:
-During the first week I build an application to test if it is possible for me to make a simple game. This project I tried if it is possible to broadcast the X coordinate with someone else. I have also tried to register and login a user with the use of local storage and a unique string id.
-
-### Demo:
-https://chat-app-tim.herokuapp.com/
+As you can see in the Week1 branch, I have been building an application to test if it was possible for me to make a simple game. During this project I was trying to broadcast the X coordinate with the other user. I also tried to register and login a user with the use of local storage and a unique string id.  
 
 ### Description
 I want to make a space invader versus game for two players. 
@@ -24,6 +21,31 @@ I want to make a space invader versus game for two players.
 * Write something to chat with the other users.
 * Use the arrow keys to move the input field.
 * If you write something now the text in the chat is also on this position for everyone.
+
+### Rubric
+#### Demo:
+https://chat-app-tim.herokuapp.com/
+
+#### Data life cycle
+...
+
+#### Real-time events
+...
+
+#### Api
+...
+
+#### Real time functions
+...
+
+#### Api
+...
+
+#### Database
+...
+
+#### Socket IO rooms
+...
 
 ### Roadmap
 * ~Demo the app online~
