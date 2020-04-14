@@ -32,9 +32,6 @@ https://chat-app-tim.herokuapp.com/
 #### Real-time events
 ...
 
-#### Api
-...
-
 #### Real time functions
 ...
 
@@ -49,7 +46,7 @@ https://chat-app-tim.herokuapp.com/
 
 ### Roadmap
 * ~Demo the app online~
-* Work on readme (Data life cycle, real-time events, and APi)
+* Work on readme
 * Implement real time functions (space invaders)
 * Make use of an API
 * Make use a database
