@@ -1,4 +1,5 @@
-import {checkKey} from "./modules/controller.js";
+import {checkKey} from "./modules/Controller.js";
+import * as router from "./modules/Router.js";
 
 const socket = io();
 
@@ -6,59 +7,40 @@ function init(){
     login();
 }
 
-$(function () {
-    $('form').submit(function(e){
-        e.preventDefault(); // prevents page reloading
+socket.on('client-message', function(data){
+    const msg = data.message;
+    const left = data.left;
 
-        //get left 
-        const form = document.getElementById("form");
-        let left = form.style.left;
+    //show message
+    const messages = document.getElementById("messages");
+    const html = `
+        <li>
+            <div style="left:${left}" class="message">
+               ${msg} 
+            </div>
+        </li>
+    `;
 
-        const data = {
-        "message" : $('#m').val(),
-        "left" : left
-        }
-
-        socket.emit('client-message', data);
-        $('#m').val('');
-        return false;
-    });
-
-    socket.on('client-message', function(data){
-        const msg = data.message;
-        const left = data.left;
-
-        //show message
-        const messages = document.getElementById("messages");
-        const html = `
-            <li>
-                <div style="left:${left}" class="message">
-                   ${msg} 
-                </div>
-            </li>
-        `;
-
-        messages.insertAdjacentHTML("beforeend", html);
-    });
-
-    socket.on('server-message', function(message){
-        //show message
-        const messages = document.getElementById("messages");
-        const html = `
-            <li>
-                <div class="message">
-                   ${message} 
-                </div>
-            </li>
-        `;
-
-        messages.insertAdjacentHTML("beforeend", html);
-    });
-
-    socket.on('store-id', function(id){        
-        localStorage.setItem('id', id);
-    });    
+    // messages.insertAdjacentHTML("beforeend", html);
 });
+
+socket.on('server-message', function(message){
+    //show message
+    const messages = document.getElementById("messages");
+    const html = `
+        <li>
+            <div class="message">
+               ${message} 
+            </div>
+        </li>
+    `;
+
+    // messages.insertAdjacentHTML("beforeend", html);
+});
+
+socket.on('store-id', function(id){        
+    localStorage.setItem('id', id);
+});    
 
 function login(){
     const id = localStorage.getItem('id');
@@ -74,7 +56,7 @@ function createAccount(){
     socket.emit('create-account', username);
 }
 
-export function onKeyLeft(){
+function onKeyLeft(){
     //move 
     const form = document.getElementById("form");
     let left = form.style.left;
@@ -88,7 +70,7 @@ export function onKeyLeft(){
     form.style.left = left;
 }
 
-export function onKeyRight(){
+function onKeyRight(){
     //move 
     const form = document.getElementById("form");
     let left = form.style.left;
@@ -100,6 +82,11 @@ export function onKeyRight(){
     left = x + "rem";
     console.log(left)
     form.style.left = left;
+}
+
+export{
+    onKeyLeft,
+    onKeyRight,
 }
 
 init();

@@ -1,4 +1,4 @@
-let nasaObject;
+let nasaJson;
 
 function init(){
     const fetch = require('node-fetch');
@@ -28,8 +28,12 @@ function init(){
     fetch(urlFinal)
     .then(res => res.json())
     .then(json => {
-        nasaObject = json;
+        nasaJson = json;
     });
+}
+
+function getNasaJson(){
+    return nasaJson;
 }
 
 function getTitle(){
@@ -49,6 +53,7 @@ function getImage(){
 }
 
 module.exports = {
+    getNasaJson,
     getTitle,
     getDescription,
     getDate,

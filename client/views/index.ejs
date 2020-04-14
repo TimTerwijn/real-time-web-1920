@@ -1,24 +1,44 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Socket.IO chat</title>
+    <meta name="description" content="SpaceInvaders versus">
+    <html lang="en"></html>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/nasaInfo.css">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
     <style>
-      body {
-        background-image: url("<%= background %>");
+      #gamePage {
+        background-image: url("<%= nasa.url %>");
       }
     </style>
 </head>
   <body>
-    <ul id="messages"></ul>
-    <div id="formContainer">
-      <form id="form" action="" style="left:0rem">
-        <input id="m" autocomplete="off" /><button>Send</button>
-      </form>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="js/lib/jquery.js"></script>
-    <script type="module" src="js/app.js"></script>
+    <!-- NASA Info Page -->
+    <main id="nasaInfoPage" class="hidden">
+      <section>
+        <h1><%= nasa.title %></h1>
+        <p><%= nasa.date %></p>
+      </section>
+      <section>
+        <!-- convert to grid and make this a background -->
+        <img src="<%= nasa.url %>">
+      </section>
+      <section>
+        <p><%= nasa.explanation %></p>
+      </section>
+    </main>
+
+    <!-- Game Page -->
+    <main id="gamePage" class="hidden">
+      test
+    </main>
+
+    <!-- JS imports -->
+    <script src="js/lib/SocketIO.js"></script>
+    <script type="module" src="js/App.js"></script>
   </body>
 </html>

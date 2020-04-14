@@ -1,4 +1,4 @@
-import * as app from "../app.js";
+import * as app from "../App.js";
 
 document.onkeydown = checkKey;
 export function checkKey(e) {

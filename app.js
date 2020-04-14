@@ -25,7 +25,8 @@ const io = require('socket.io').listen(server);
 
 //routes
 app.get('/', function(req, res){ 
-    res.render("index", {"background":api.getImage()}) 
+    console.log(api.getNasaJson())
+    res.render("index", {"nasa":api.getNasaJson()}) 
 }); 
 
 
