@@ -1,4 +1,5 @@
 const express = require('express');
+const api = require("./server/Api.js");
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
