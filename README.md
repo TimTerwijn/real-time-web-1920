@@ -1,4 +1,4 @@
-# Chat App
+# SpaceInvaders.io
 
 ## Autor
 Tim Terwijn
@@ -45,7 +45,7 @@ https://chat-app-tim.herokuapp.com/
 ...
 
 ### Roadmap
-* ~Demo the app online~
+* Demo the app online
 * Work on readme
 * Implement real time functions (space invaders)
 * Make use of an API
