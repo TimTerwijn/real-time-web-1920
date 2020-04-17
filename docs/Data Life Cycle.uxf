@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1242</x>
+      <y>207</y>
+      <w>189</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>Nasa Api
+--
+picture of the day{
+  copyright
+  date
+  explanation (a story)
+  hdurl
+  media_type
+  service_version
+  title
+  url
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>207</y>
+      <w>306</w>
+      <h>333</h>
+    </coordinates>
+    <panel_attributes>Server Side (Harry Potter)
+--
+
+
+
+
+
+
+
+
+
+userID : "4f8330e6-5093-4755-884d-886fc6a24ecc"
+
+
+
+
+
+myX: 123
+hisX: 453</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>702</x>
+      <y>207</y>
+      <w>342</w>
+      <h>414</h>
+    </coordinates>
+    <panel_attributes>Client Side
+--
+
+Get picture of the day and store it.
+
+Page request, return html + picture of the day
+
+
+Receive username, return a unique ID and store both.
+
+users{
+  "4f8330e6-5093-4755-884d-886fc6a24ecc": "Harry Potter",
+  "7i3474a9-1292-2571-s723-395fd3s65hds": "Tim Terwijn",
+}
+
+
+Broadcast new coordinate to other users.
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>297</y>
+      <w>279</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+username (SocketIO)</panel_attributes>
+    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>342</y>
+      <w>279</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+user ID (SocketIO)</panel_attributes>
+    <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1035</x>
+      <y>225</y>
+      <w>225</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+GET picture of the day (Fetch)</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>270</y>
+      <w>279</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+GET picture of the day (EJS)</panel_attributes>
+    <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>423</y>
+      <w>279</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+New X coordinate of Harry (SocketIO)</panel_attributes>
+    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>549</y>
+      <w>306</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>Server Side (Tim Terwijn)
+--
+User ID : "7i3474a9-1292-2571-s723-395fd3s65hds"
+
+myX: 453
+hisX: 123</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>459</y>
+      <w>279</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Broadcast new X coordinate of Harry</panel_attributes>
+    <additional_attributes>10.0;160.0;50.0;160.0;50.0;10.0;290.0;10.0</additional_attributes>
+  </element>
+</diagram>
