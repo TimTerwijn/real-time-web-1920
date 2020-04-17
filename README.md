@@ -27,7 +27,7 @@ I want to make a space invader versus game for two players.
 https://chat-app-tim.herokuapp.com/
 
 #### Data life cycle
-...
+![data-life-cycle](/docs/data-life-cycle.png)
 
 #### Real-time events
 ...
