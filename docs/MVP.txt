@@ -1,0 +1,17 @@
+
+MVP:
+* App staat online (heroku)
+* (Data life cycle, real-time events, en externe databron)
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+* Api met data, loading screen en background image.
+* Player 1 komt in room1, player 2 komt daarna ook in room1. Daarna komt player 3 in room 2 samen met player4. (moet ook werken met 1 player)
+* Players kunnen bewegen en schieten. Er zijn bunkers waar ze achter kunnen schuilen en er is collision.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Mini MVP:
+* Database???, Denk aan langetermijn memory. Usernames en highscores
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------

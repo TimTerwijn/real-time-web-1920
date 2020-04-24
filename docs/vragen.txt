@@ -1,0 +1,8 @@
+Vragen
+* Wat zijn de real-time events die je moet beschrijven. = Kan in dlc zitten het gaat om de messages tussen de client en server. maak maar een nieuw kopje in je readme.
+* De externe databron die je moet beschrijven, is dat de API? = Ja.
+* (Leg api uit) Is mijn API voldoende? Nee, doe iets als starwars api en kies je schip uit.
+* Stap 3 van de rubic is vaag. MVP maken is voldoende mits je zoiets als starwars api hebt gebruikt.
+** Wat vragen ze precies voor de OF.
+** Wat vragen ze precies na de OF.
+** Wat bedoelen ze met datamanupulaties?
