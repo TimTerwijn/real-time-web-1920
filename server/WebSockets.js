@@ -4,50 +4,106 @@ const { v4: uuidv4 } = require('uuid');
 const users = {};
 
 function set(io){
+    //global room
     io.on('connection', function(socket){
-    
-        const id = uuidv4();//random string
-        let username = "Harry Potter";
-    
-        socket.on('create-account', function(_username){
-            //set username
-            username = _username;
+        
+        socket.on('register', function(username){       
+            //generate unique user id
+            const userId = uuidv4();
             
             //safe user
-            users[id] = username;
+            users[userId] = username;
     
             //share id with client
-            io.emit('store-id', id);
-            
-            //notify client
-            const message = `${_username} has joined!`;
-            io.emit('server-message', message);
+            socket.emit('store-userId', userId);
             
             //notify server
-            console.log(message);
+            console.log(`User ${username} has created an account and joined the global room`);
+
+            //join a room
+            joinRoom(io, socket, username);
         });
     
-        socket.on('login', function(id){
+        socket.on('login', function(userId){
             //get username
-            username = users[id];
+            username = users[userId];
             
-            const message = `${username} has joined!`;
-            io.emit('server-message', message);
-            console.log(message);
+            //notify server
+            console.log(`User ${username} has joined the global room`);
+
+            //join a room
+            joinRoom(io, socket, username);
         });
+    });
+}
+
+function joinRoom(io, socket, username){
+
+    const room = getRoom(io, socket);       
+
+    //private room
+    room.on('connection', function(socket){
+
+        //notify server
+        console.log(`User ${username} has joined room: ` + room);
         
         socket.on('disconnect', function(){
-            const message = `${username} has left...`;
-    
-            io.emit('server-message', message);
+            const message = `${username} has left the room`;
+
+            socket.emit('server-message', message);
             console.log(message);
         });
         
         socket.on('client-message', function(data){
-            io.emit('client-message', data);
+            socket.emit('client-message', data);
             console.log('message: ' + data.message + " | x:" + data.left);
         });
     });
+}
+
+//true if someone is alone in a room
+let hasRoomAvailable = false;
+
+//all rooms
+const roomNames = [];
+
+function getRoom(io, socket){
+    //check if another user already created a room
+    if(hasRoomAvailable){     
+        //reverse boolean
+        hasRoomAvailable = !hasRoomAvailable;
+
+        //get last room name
+        const roomName = roomNames[rooms.length - 1];
+
+        //send room to client
+        socket.socket.emit('join-room', roomName);
+
+        //join the room
+        const room = io.of(roomName);
+
+        //return room
+        return room;
+    }else{
+        //reverse boolean
+        hasRoomAvailable = !hasRoomAvailable;
+
+        //generate unique id
+        const roomID = uuidv4();
+        const roomName = `/room:${roomID}`;
+
+        //add room name to room list
+        roomNames.push(roomName);
+
+        //send room to client
+        socket.socket.emit('join-room', roomName);
+
+        //create a new room
+        const room = io.of(roomName);
+
+        //return room
+        return room;
+    }    
 }
 
 module.exports = {

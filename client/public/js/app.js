@@ -1,10 +1,37 @@
 import {checkKey} from "./modules/Controller.js";
 
 const socket = io();
+let room;
 
 function init(){
     login();
 }
+
+//global room
+
+function login(){
+    const id = localStorage.getItem('id');
+    if(id == null){
+        createAccount();
+    }else{
+        socket.emit('login', id);
+    }
+}
+
+function createAccount(){
+    const username = prompt("Please enter your name", "Harry Potter");
+    socket.emit('register', username);
+}
+
+socket.on('store-userId', function(id){        
+    localStorage.setItem('id', id);
+});
+
+socket.on("join-room", function(_roomName){
+    
+});
+
+//private room
 
 socket.on('client-message', function(data){
     const msg = data.message;
@@ -37,23 +64,7 @@ socket.on('server-message', function(message){
     // messages.insertAdjacentHTML("beforeend", html);
 });
 
-socket.on('store-id', function(id){        
-    localStorage.setItem('id', id);
-});    
 
-function login(){
-    const id = localStorage.getItem('id');
-    if(id == null){
-        createAccount();
-    }else{
-        socket.emit('login', id);
-    }
-}
-
-function createAccount(){
-    const username = prompt("Please enter your name", "Harry Potter");
-    socket.emit('create-account', username);
-}
 
 function onKeyLeft(){
     //move 
