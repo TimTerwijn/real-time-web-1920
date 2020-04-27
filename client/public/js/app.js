@@ -1,5 +1,4 @@
 import {checkKey} from "./modules/Controller.js";
-import * as router from "./modules/Router.js";
 
 const socket = io();
 

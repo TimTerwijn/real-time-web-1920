@@ -10,34 +10,12 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/nasaInfo.css">
     <link rel="stylesheet" type="text/css" href="css/game.css">
-    <style>
-      #gamePage {
-        background-image: url("<%= nasa.url %>");
-      }
-    </style>
 </head>
   <body>
-    <!-- NASA Info Page -->
-    <main id="nasaInfoPage" class="hidden">
-      <section>
-        <h1><%= nasa.title %></h1>
-        <p><%= nasa.date %></p>
-      </section>
-      <section>
-        <!-- convert to grid and make this a background -->
-        <img src="<%= nasa.url %>">
-      </section>
-      <section>
-        <p><%= nasa.explanation %></p>
-      </section>
+    <main id="gamePage">
+      <section>test</section>
     </main>
-
-    <!-- Game Page -->
-    <main id="gamePage" class="hidden">
-      test
-    </main>
-
-    <!-- JS imports -->
+    
     <script src="js/lib/SocketIO.js"></script>
     <script type="module" src="js/App.js"></script>
   </body>
