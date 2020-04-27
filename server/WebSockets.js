@@ -1,4 +1,9 @@
+//get libiries
 const { v4: uuidv4 } = require('uuid');
+
+//get modules
+const User = require("../server/objects/User.js");
+const Room = require("../server/objects/Room.js");
 
 //all users
 const users = {};
@@ -7,103 +12,142 @@ function set(io){
     //global room
     io.on('connection', function(socket){
         
+        let user;
+        let room;
+
         socket.on('register', function(username){       
             //generate unique user id
             const userId = uuidv4();
             
             //safe user
-            users[userId] = username;
+            user = new User(userId, username);
+
+            //add user to map
+            users[userId] = user;
+
+            //notify server
+            console.log(`User ${username} has created an account`);
     
             //share id with client
-            socket.emit('store-userId', userId);
-            
-            //notify server
-            console.log(`User ${username} has created an account and joined the global room`);
+            socket.emit('store-userId', userId);            
 
-            //join a room
-            joinRoom(io, socket, username);
+            //join room
+            room = getRoom(io, socket, user);         
         });
     
         socket.on('login', function(userId){
             //get username
-            username = users[userId];
+            user = users[userId];
+
+            if(user == undefined){
+                //notify server of error
+                console.log("error: someone tries to login with a wrong user ID: " + userId);
+
+                //give user a chance to make a new account
+                socket.emit('error-wrong-id');
+
+                //stop to prevent server from crashing
+                return;
+            }
+
+            username = user.getUsername();
             
             //notify server
-            console.log(`User ${username} has joined the global room`);
+            console.log(`User ${username} has joined`);
 
-            //join a room
-            joinRoom(io, socket, username);
+            //join room
+            room = getRoom(io, socket, user);
         });
-    });
-}
 
-function joinRoom(io, socket, username){
-
-    const room = getRoom(io, socket);       
-
-    //private room
-    room.on('connection', function(socket){
-
-        //notify server
-        console.log(`User ${username} has joined room: ` + room);
-        
         socket.on('disconnect', function(){
-            const message = `${username} has left the room`;
+            if(room == undefined){
+                //fix crashes
+                console.log("Error! room is undefined")
+                return
+            }
 
-            socket.emit('server-message', message);
+            //remove user from room
+            room.removeUser(user);
+
+            const message = `${user.getUsername()} has left the room`;
+
+            //notify clients in room
+            io.to(room.getName()).emit("server-message", message);
+        
+            //notify server
             console.log(message);
         });
         
         socket.on('client-message', function(data){
-            socket.emit('client-message', data);
-            console.log('message: ' + data.message + " | x:" + data.left);
+            //notify clients in room
+            io.to(room.getName()).emit("client-message", message);
+            
+            if(room == undefined){
+                //fix crashes
+                console.log("Error! room is undefined")
+                return
+            }
+
+            //notify server
+            console.log(message);
         });
     });
 }
 
-//true if someone is alone in a room
-let hasRoomAvailable = false;
-
 //all rooms
-const roomNames = [];
+const rooms = [];
 
-function getRoom(io, socket){
-    //check if another user already created a room
-    if(hasRoomAvailable){     
-        //reverse boolean
-        hasRoomAvailable = !hasRoomAvailable;
+function getRoom(io,socket, newUser){
+    //get last room
+    const lastRoom = rooms[rooms.length - 1];
 
-        //get last room name
-        const roomName = roomNames[rooms.length - 1];
+    //join room if last room needs a second player
+    if(lastRoom != null){
+        if(lastRoom.looksForPlayer()){
+            //add user to room
+            lastRoom.setUser2(newUser);
 
-        //send room to client
-        socket.socket.emit('join-room', roomName);
+            const message = `${newUser.getUsername()} has joined the room`;
 
-        //join the room
-        const room = io.of(roomName);
+            //notify server
+            console.log(message)
 
-        //return room
-        return room;
-    }else{
-        //reverse boolean
-        hasRoomAvailable = !hasRoomAvailable;
+            //join room
+            socket.join(lastRoom.getName());
 
-        //generate unique id
-        const roomID = uuidv4();
-        const roomName = `/room:${roomID}`;
+            //notify clients in room
+            io.to(lastRoom.getName()).emit("server-message", message);
+    
+            //return room
+            return lastRoom;
+        }
+    }
+    
+    //else generate a new room
 
-        //add room name to room list
-        roomNames.push(roomName);
+    //generate unique room id
+    const roomID = uuidv4();
+    const roomName = `/room:${roomID}`;
 
-        //send room to client
-        socket.socket.emit('join-room', roomName);
+    //create room object
+    const room = new Room(roomName, newUser);
 
-        //create a new room
-        const room = io.of(roomName);
+    //add room to room list
+    rooms.push(room);
 
-        //return room
-        return room;
-    }    
+    const message = `${newUser.getUsername()} has created a room`;
+
+    //notify server
+    console.log(message)
+
+    //join room
+    socket.join(room.getName());
+
+    //notify clients in room
+    io.to(room.getName()).emit("server-message", message);
+
+    //return room object
+    return room;
 }
 
 module.exports = {

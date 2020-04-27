@@ -7,7 +7,6 @@ function init(){
     login();
 }
 
-//global room
 
 function login(){
     const id = localStorage.getItem('id');
@@ -27,11 +26,9 @@ socket.on('store-userId', function(id){
     localStorage.setItem('id', id);
 });
 
-socket.on("join-room", function(_roomName){
-    
+socket.on('error-wrong-id', function(){        
+    createAccount();
 });
-
-//private room
 
 socket.on('client-message', function(data){
     const msg = data.message;
@@ -47,7 +44,7 @@ socket.on('client-message', function(data){
         </li>
     `;
 
-    // messages.insertAdjacentHTML("beforeend", html);
+    messages.insertAdjacentHTML("beforeend", html);
 });
 
 socket.on('server-message', function(message){
@@ -61,7 +58,7 @@ socket.on('server-message', function(message){
         </li>
     `;
 
-    // messages.insertAdjacentHTML("beforeend", html);
+    messages.insertAdjacentHTML("beforeend", html);
 });
 
 
