@@ -1,4 +1,4 @@
-import {checkKey} from "./modules/Controller.js";
+import * as controller from "./modules/Controller.js";
 
 const socket = io();
 let room;
@@ -61,41 +61,27 @@ socket.on('server-message', function(message){
     // messages.insertAdjacentHTML("beforeend", html);
 });
 
-
-
-function onKeyLeft(){
-    //get my player
-    const me = document.querySelector("section:nth-child(5)>img");
-    
-    //move 
-    let left = me.style.left;
-    
-    //remove letters and make a number
-    let x = parseInt(left.replace(/\D/g,''));
-    x = x - 5;
-
-    left = x + "px";
-    me.style.left = left;
+function onLeftKeyDown(){
+    // socket.emit('on-key-left');
 }
 
-function onKeyRight(){
-    //get my player
-    const me = document.querySelector("section:nth-child(5)>img");
-    
-    //move 
-    let left = me.style.left;
-    
-    //remove letters and make a number
-    let x = parseInt(left.replace(/\D/g,''));
-    x = x + 5;
+function onLeftKeyUp(){
+    // socket.emit('on-key-left');
+}
 
-    left = x + "px";
-    me.style.left = left;
+function onRightKeyDown(){
+    // socket.emit('on-right-key-up');
+}
+
+function onRightKeyUp(){
+    // socket.emit('on-key-right');
 }
 
 export{
-    onKeyLeft,
-    onKeyRight,
+    onLeftKeyDown,
+    onLeftKeyUp,
+    onRightKeyDown,
+    onRightKeyUp,
 }
 
 init();

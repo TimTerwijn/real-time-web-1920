@@ -1,13 +1,26 @@
 import * as app from "../App.js";
 
-document.onkeydown = checkKey;
-export function checkKey(e) {
+document.onkeydown = keyDown;
+document.onkeyup = keyUp;
+
+function keyDown(e) {
     e = e || window.event;
 
     if (e.keyCode == '37') {// left arrow
-      app.onKeyLeft();
+      app.onLeftKeyDown();
     }
     else if (e.keyCode == '39') {// right arrow
-      app.onKeyRight();
+      app.onRightKeyDown();
     }
+}
+
+function keyUp(e) {
+  e = e || window.event;
+
+  if (e.keyCode == '37') {// left arrow
+    app.onLeftKeyUp();
+  }
+  else if (e.keyCode == '39') {// right arrow
+    app.onRightKeyUp();
+  }
 }
