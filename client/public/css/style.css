@@ -32,12 +32,6 @@ section:first-child>img{
     transform: rotate(180deg);
 }
 
-
-
-
-
-
-
 .hidden{
-    display: none;
+    opacity: 0;
 }

@@ -30,6 +30,21 @@ socket.on('error-wrong-id', function(){
     createAccount();
 });
 
+let playerType = "player1";
+socket.on('set-player', function(_playerType){        
+    
+    const main = document.querySelector("main");
+
+    //rotate screen
+    if(_playerType == "player2"){
+        playerType = "player2";
+        main.style.transform = "rotate(180deg)";
+    }
+
+    //render screen
+    main.classList.toggle("hidden");
+});
+
 socket.on('client-message', function(data){
     const msg = data.message;
     const left = data.left;
@@ -62,19 +77,35 @@ socket.on('server-message', function(message){
 });
 
 function onLeftKeyDown(){
-    socket.emit('on-left-key-down');
+    if(playerType == "player1"){
+        socket.emit('on-left-key-down');
+    }else{
+        socket.emit('on-right-key-down');
+    }
 }
 
 function onLeftKeyUp(){
-    socket.emit('on-left-key-up');
+    if(playerType == "player1"){
+        socket.emit('on-left-key-up');
+    }else{
+        socket.emit('on-right-key-up');
+    }
 }
 
 function onRightKeyDown(){
-    socket.emit('on-right-key-down');
+    if(playerType == "player1"){
+        socket.emit('on-right-key-down');
+    }else{
+        socket.emit('on-left-key-down');
+    }
 }
 
 function onRightKeyUp(){
-    socket.emit('on-right-key-up');
+    if(playerType == "player1"){
+        socket.emit('on-right-key-up');
+    }else{
+        socket.emit('on-left-key-up');
+    }
 }
 
 socket.on("emitPlayerX", function(playerCoordinates){

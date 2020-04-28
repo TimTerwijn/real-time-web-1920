@@ -155,6 +155,9 @@ function getRoom(io,socket, newUser){
             //join room
             socket.join(lastRoom.getName());
 
+            //render game and set player
+            socket.emit('set-player', "player2");
+
             //notify clients in room
             lastRoom.emitRoomServerMessage(message);
     
@@ -182,6 +185,9 @@ function getRoom(io,socket, newUser){
 
     //join room
     socket.join(room.getName());
+
+    //render game and set player
+    socket.emit('set-player', "player1");
 
     //notify clients in room
     room.emitRoomServerMessage(message);
