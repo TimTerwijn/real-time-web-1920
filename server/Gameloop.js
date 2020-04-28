@@ -16,7 +16,7 @@ function gameloop(room){
     }
 
     if(room.user2 != undefined){
-        if(room.user1.hasVelocity()){
+        if(room.user2.hasVelocity()){
             room.user2.calcNewPosition();
         }
     }

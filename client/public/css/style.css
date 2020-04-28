@@ -28,6 +28,10 @@ section>img{
     height: 100%;
 }
 
+section:first-child>img{
+    transform: rotate(180deg);
+}
+
 
 
 

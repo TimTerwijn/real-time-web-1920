@@ -82,14 +82,21 @@ socket.on("emitPlayerX", function(playerCoordinates){
     const player2X = playerCoordinates.player2X;
 
     setPlayer1X(player1X);
+    setPlayer2X(player2X);
 });
 
 function setPlayer1X(x){
-    //get my player
-    const me = document.querySelector("section:nth-child(5)>img");
+    const player1 = document.querySelector("section:nth-child(5)>img");
 
     const left = x + "px";
-    me.style.left = left;
+    player1.style.left = left;
+}
+
+function setPlayer2X(x){
+    const player2 = document.querySelector("section:first-child>img");
+
+    const left = x + "px";
+    player2.style.left = left;
 }
 
 export{
