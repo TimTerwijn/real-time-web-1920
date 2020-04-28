@@ -1,22 +1,32 @@
 function start(room){
     //start async gameloop
-    setTimeout(gameloop(room), 100);
+    setTimeout(gameloop, 100, room);
 }
 
 //private async
 function gameloop(room){
     //do a tick
-    console.log("tick!");
+    // console.log("tick!");
 
     if(room.user1 != undefined){
-        room.user1.calcNewPosition();
+        if(room.user1.hasVelocity()){
+            //calc position
+            room.user1.calcNewPosition();
+        }        
     }
 
     if(room.user2 != undefined){
-        room.user2.calcNewPosition();
+        if(room.user1.hasVelocity()){
+            room.user2.calcNewPosition();
+        }
+    }
+
+    if(room.userHasVelocity()){
+        //broadcast position
+        room.emitPlayerX();
     }
          
-    setTimeout(gameloop(room), 100);
+    setTimeout(gameloop, 100, room);
 }
 
 module.exports = {

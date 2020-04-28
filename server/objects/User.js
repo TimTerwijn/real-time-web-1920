@@ -4,7 +4,7 @@ class User {
         this.username = username;
         this.x = 0;
         this.velocity = 0;
-        this.maxSpeed = 1;
+        this.maxSpeed = 8;
     }
 
     getId(){
@@ -41,6 +41,10 @@ class User {
 
     calcNewPosition(){
         this.x = this.x + this.velocity;
+    }
+
+    hasVelocity(){
+        return this.velocity != 0;
     }
 }
 

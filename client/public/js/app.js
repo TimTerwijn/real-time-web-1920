@@ -62,19 +62,34 @@ socket.on('server-message', function(message){
 });
 
 function onLeftKeyDown(){
-    // socket.emit('on-key-left');
+    socket.emit('on-left-key-down');
 }
 
 function onLeftKeyUp(){
-    // socket.emit('on-key-left');
+    socket.emit('on-left-key-up');
 }
 
 function onRightKeyDown(){
-    // socket.emit('on-right-key-up');
+    socket.emit('on-right-key-down');
 }
 
 function onRightKeyUp(){
-    // socket.emit('on-key-right');
+    socket.emit('on-right-key-up');
+}
+
+socket.on("emitPlayerX", function(playerCoordinates){
+    const player1X = playerCoordinates.player1X;
+    const player2X = playerCoordinates.player2X;
+
+    setPlayer1X(player1X);
+});
+
+function setPlayer1X(x){
+    //get my player
+    const me = document.querySelector("section:nth-child(5)>img");
+
+    const left = x + "px";
+    me.style.left = left;
 }
 
 export{

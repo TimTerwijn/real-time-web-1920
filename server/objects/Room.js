@@ -2,7 +2,8 @@ const gameloop = require("../Gameloop.js");
 
 class Room {
     
-    constructor(name, newUser) {
+    constructor(io, name, newUser) {
+        this.io = io;
         this.name = name;
         this.user1 = newUser;
         this.user2 = null;
@@ -37,7 +38,51 @@ class Room {
         }else if(this.user2 === user){
             this.user2 = null;
         }
-    }    
+    }
+    
+    _emitRoomMessage(name, value){
+        this.io.to(this.name).emit(name, value);
+    }
+
+    emitPlayerX(){
+        const name = "emitPlayerX";
+        const playerCoordinates = {
+            "player1X": 0,
+            "player2X": 0,
+        }
+
+        if(this.user1 != undefined){
+            playerCoordinates["player1X"] = this.user1.getX();
+        }
+
+        if(this.user2 != undefined){
+            playerCoordinates["player2X"] = this.user2.getX();
+        }
+
+        this._emitRoomMessage(name, playerCoordinates);
+    }
+
+    emitRoomServerMessage(message){
+        const name = "server-message";
+        this._emitRoomMessage(name, message);
+    }
+
+    userHasVelocity(){
+        let hasVelocity = 0;
+        if(this.user1 != undefined){
+            if(this.user1.hasVelocity()){
+                hasVelocity++;
+            }
+        } 
+
+        if(this.user2 != undefined){
+            if(this.user2.hasVelocity()){
+                hasVelocity++;
+            }
+        } 
+
+        return hasVelocity > 0;
+    }
 }
 
 module.exports = Room;

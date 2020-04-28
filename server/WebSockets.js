@@ -72,21 +72,61 @@ function set(io){
             const message = `${user.getUsername()} has left the room`;
 
             //notify clients in room
-            io.to(room.getName()).emit("server-message", message);
+            room.emitRoomServerMessage(message);
         
             //notify server
             console.log(message);
         });
+
+        socket.on('on-right-key-down', function(){
+            if(user == undefined){
+                //fix crashes
+                console.log("Error! user is undefined")
+                return
+            }
+
+            user.moveRight();            
+        });
+
+        socket.on('on-right-key-up', function(){
+            if(user == undefined){
+                //fix crashes
+                console.log("Error! user is undefined")
+                return
+            }
+
+            user.stopMoving();            
+        });
+
+        socket.on('on-left-key-down', function(){
+            if(user == undefined){
+                //fix crashes
+                console.log("Error! user is undefined")
+                return
+            }
+
+            user.moveLeft();            
+        });
+
+        socket.on('on-left-key-up', function(){
+            if(user == undefined){
+                //fix crashes
+                console.log("Error! user is undefined")
+                return
+            }
+
+            user.stopMoving();            
+        });
         
         socket.on('client-message', function(data){
-            //notify clients in room
-            io.to(room.getName()).emit("client-message", message);
-            
             if(room == undefined){
                 //fix crashes
                 console.log("Error! room is undefined")
                 return
             }
+
+            //notify clients in room
+            room.emitRoomServerMessage(message);
 
             //notify server
             console.log(message);
@@ -116,7 +156,7 @@ function getRoom(io,socket, newUser){
             socket.join(lastRoom.getName());
 
             //notify clients in room
-            io.to(lastRoom.getName()).emit("server-message", message);
+            lastRoom.emitRoomServerMessage(message);
     
             //return room
             return lastRoom;
@@ -130,7 +170,7 @@ function getRoom(io,socket, newUser){
     const roomName = `/room:${roomID}`;
 
     //create room object
-    const room = new Room(roomName, newUser);
+    const room = new Room(io, roomName, newUser);
 
     //add room to room list
     rooms.push(room);
@@ -144,7 +184,7 @@ function getRoom(io,socket, newUser){
     socket.join(room.getName());
 
     //notify clients in room
-    io.to(room.getName()).emit("server-message", message);
+    room.emitRoomServerMessage(message);
 
     //return room object
     return room;
