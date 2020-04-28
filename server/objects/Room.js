@@ -1,9 +1,14 @@
+const gameloop = require("../Gameloop.js");
+
 class Room {
     
     constructor(name, newUser) {
         this.name = name;
         this.user1 = newUser;
         this.user2 = null;
+
+        //start async gameloop
+        gameloop.start(this)
     }
 
     getName(){
@@ -32,7 +37,7 @@ class Room {
         }else if(this.user2 === user){
             this.user2 = null;
         }
-    }
+    }    
 }
 
 module.exports = Room;
