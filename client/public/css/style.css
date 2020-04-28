@@ -1,3 +1,39 @@
+*{
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+main{
+    border: 1px solid black;
+}
+
+section{
+    height: 40px;
+    width: 320px;
+    background-color: white;
+}
+
+section:nth-child(3){
+    height: 160px;
+}
+
+section>img{
+    position: relative;
+    height: 100%;
+}
+
+
+
+
+
+
+
 .hidden{
     display: none;
 }

@@ -44,7 +44,7 @@ socket.on('client-message', function(data){
         </li>
     `;
 
-    messages.insertAdjacentHTML("beforeend", html);
+    // messages.insertAdjacentHTML("beforeend", html);
 });
 
 socket.on('server-message', function(message){
@@ -58,37 +58,39 @@ socket.on('server-message', function(message){
         </li>
     `;
 
-    messages.insertAdjacentHTML("beforeend", html);
+    // messages.insertAdjacentHTML("beforeend", html);
 });
 
 
 
 function onKeyLeft(){
+    //get my player
+    const me = document.querySelector("section:nth-child(5)>img");
+    
     //move 
-    const form = document.getElementById("form");
-    let left = form.style.left;
-
-    //remove letters and make a number
-    let x = parseInt(left.replace(/\D/g,''));
-    x = x - 1;
-
-    left = x + "rem";
-    console.log(left)
-    form.style.left = left;
-}
-
-function onKeyRight(){
-    //move 
-    const form = document.getElementById("form");
-    let left = form.style.left;
+    let left = me.style.left;
     
     //remove letters and make a number
     let x = parseInt(left.replace(/\D/g,''));
-    x = x + 1;
+    x = x - 5;
 
-    left = x + "rem";
-    console.log(left)
-    form.style.left = left;
+    left = x + "px";
+    me.style.left = left;
+}
+
+function onKeyRight(){
+    //get my player
+    const me = document.querySelector("section:nth-child(5)>img");
+    
+    //move 
+    let left = me.style.left;
+    
+    //remove letters and make a number
+    let x = parseInt(left.replace(/\D/g,''));
+    x = x + 5;
+
+    left = x + "px";
+    me.style.left = left;
 }
 
 export{
