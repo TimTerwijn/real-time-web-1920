@@ -1,28 +1,27 @@
-function hideAllScreens(){
-    const selector = "body>main";
-    const screenElements = document.querySelector(selector);
-    
-    for (let i = 0; i < screenElements.length; i++) {
-        const screenElement = screenElements[i];
-        screenElement.classList.add("hidden");
-    }    
-}
-
-function nasaInfo(){
-    hideAllScreens();
-
-    const nasaInfoPage = document.getElementById("nasaInfoPage");
-    nasaInfoPage.classList.toggle("hidden");
-}
-
 function game(){
-    hideAllScreens();
-
-    const gamePage = document.getElementById("gamePage");
+    const gamePage = document.querySelector("main");
     gamePage.classList.toggle("hidden");
 }
 
+function starshipSelection(starships){
+    const container = document.querySelector("body>div");
+    //fill starships
+    starships.forEach(starship => {
+        const html = `
+            <div onclick="emitSprite('${starship.img}')">
+                <img src="${starship.img}" alt="${starship.name}">
+                <p>${starship.name}</p>
+            </div>
+        `;
+
+        container.insertAdjacentHTML("beforeend", html);
+    });
+
+    //show container   
+    container.classList.toggle("hidden");
+}
+
 export{
-    nasaInfo,
     game,
+    starshipSelection,
 }

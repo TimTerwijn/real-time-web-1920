@@ -7,6 +7,7 @@ class Room {
         this.name = name;
         this.user1 = newUser;
         this.user2 = null;
+        this.bull
 
         //start async gameloop
         gameloop.start(this)
@@ -17,11 +18,11 @@ class Room {
     }
 
     getUser1(){
-        return this.User1;
+        return this.user1;
     }
 
     getUser2(){
-        return this.User2;
+        return this.user2;
     }
 
     setUser2(newUser){
@@ -40,7 +41,7 @@ class Room {
         }
     }
     
-    _emitRoomMessage(name, value){
+    emitRoomMessage(name, value){
         this.io.to(this.name).emit(name, value);
     }
 
@@ -59,12 +60,12 @@ class Room {
             playerCoordinates["player2X"] = this.user2.getX();
         }
 
-        this._emitRoomMessage(name, playerCoordinates);
+        this.emitRoomMessage(name, playerCoordinates);
     }
 
     emitRoomServerMessage(message){
         const name = "server-message";
-        this._emitRoomMessage(name, message);
+        this.emitRoomMessage(name, message);
     }
 
     userHasVelocity(){
@@ -82,6 +83,10 @@ class Room {
         } 
 
         return hasVelocity > 0;
+    }
+
+    shoot(ShootingUser){
+        
     }
 }
 

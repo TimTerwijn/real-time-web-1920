@@ -12,6 +12,9 @@ function keyDown(e) {
     else if (e.keyCode == '39') {// right arrow
       app.onRightKeyDown();
     }
+    else if (e.keyCode == '32') {// space
+      app.onSpace();
+    }
 }
 
 function keyUp(e) {

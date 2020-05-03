@@ -1,4 +1,5 @@
 import * as controller from "./modules/Controller.js";
+import * as render from "./modules/Render.js";
 
 const socket = io();
 let room;
@@ -108,6 +109,10 @@ function onRightKeyUp(){
     }
 }
 
+function onSpace(){
+    socket.emit('on-space');
+}
+
 socket.on("emitPlayerX", function(playerCoordinates){
     const player1X = playerCoordinates.player1X;
     const player2X = playerCoordinates.player2X;
@@ -130,11 +135,34 @@ function setPlayer2X(x){
     player2.style.left = left;
 }
 
+socket.on("store-starships", function(starships){
+    render.starshipSelection(starships);
+});
+
+//make function public
+window.emitSprite = emitSprite;
+function emitSprite(sprite){
+    socket.emit('set-sprite', sprite);
+}
+
+socket.on("set-player1-sprite", function(sprite){
+    const player1 = document.querySelector("section:nth-child(5)>img");
+    player1.src=sprite;
+});
+
+socket.on("set-player2-sprite", function(sprite){
+    const player2 = document.querySelector("section:first-child>img");
+    player2.src=sprite;
+});
+
+
+
 export{
     onLeftKeyDown,
     onLeftKeyUp,
     onRightKeyDown,
     onRightKeyUp,
+    onSpace,
 }
 
 init();

@@ -6,7 +6,6 @@ const path = require('path');
 //set modules
 const routes = require("./server/Routes.js")
 const webSockets = require("./server/WebSockets.js");
-const api = require("./server/Api.js");
 
 //set public folder
 app.use(express.static('client/public'));

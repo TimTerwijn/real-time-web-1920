@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 //get modules
 const User = require("../server/objects/User.js");
 const Room = require("../server/objects/Room.js");
+const starwarsApi = require("../server/StarwarsApi.js");
 
 //all users
 const users = {};
@@ -32,7 +33,11 @@ function set(io){
             socket.emit('store-userId', userId);            
 
             //join room
-            room = getRoom(io, socket, user);         
+            room = getRoom(io, socket, user);
+            
+            //share starships
+            const starships = starwarsApi.getStarships();
+            socket.emit('store-starships', starships);
         });
     
         socket.on('login', function(userId){
@@ -57,6 +62,10 @@ function set(io){
 
             //join room
             room = getRoom(io, socket, user);
+
+            //share starships
+            const starships = starwarsApi.getStarships();
+            socket.emit('store-starships', starships);
         });
 
         socket.on('disconnect', function(){
@@ -116,6 +125,38 @@ function set(io){
             }
 
             user.stopMoving();            
+        });
+
+        socket.on('on-space', function(){
+            if(user == undefined || room == undefined){
+                //fix crashes
+                console.log("Error! user or room is undefined")
+                return
+            }
+
+            room.shoot(user);
+        });
+
+        socket.on('set-sprite', function(sprite){
+            if(user == undefined || room == undefined){
+                //fix crashes
+                console.log("Error! user or room is undefined")
+                return
+            }
+
+            //get player type
+            //if I am player 1
+            if(room.getUser1() === user){
+                room.emitRoomMessage("set-player1-sprite", sprite);
+            }else if(room.getUser2() === user){//if I am player 2
+                room.emitRoomMessage("set-player2-sprite", sprite);
+            }else{
+                console.log(user)
+                console.log(room.getUser1())
+                console.log(room.getUser2())
+                console.log(room)
+                console.log("player not in both rooms")
+            }
         });
         
         socket.on('client-message', function(data){
