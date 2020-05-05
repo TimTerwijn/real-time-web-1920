@@ -15,8 +15,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/client/views'));
 
 //set port listener 
-const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, () => {
+const server = app.listen(process.env.PORT || 3000, function(){
     console.log(`Our app is running on port ${ PORT }`);
 });
 
