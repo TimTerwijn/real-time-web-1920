@@ -6,6 +6,8 @@ Tim Terwijn
 ### Week1:
 As you can see in the Week1 branch, I have been building an application to test if it was possible for me to make a simple game. During this project I was trying to broadcast the X coordinate with the other user. I also tried to register and login a user with the use of local storage and a unique string id.  
 
+![week1](/docs/week1.png)
+
 ### Description
 I want to make a space invader versus game for two players. 
 
