@@ -36,13 +36,36 @@ https://chat-app-tim.herokuapp.com/
 ...
 
 #### Api
-...
+I made use of the starwars API, the starwars api is used to get the data of the starships.  
+  
+Starships{  
+-MGLT  
+-cargo_capacity  
+-consumables  
+-cost_in_credits  
+-created  
+-crew  
+-edited  
+-hyperdrive_rating  
+-length  
+-manufacturer  
+-max_atmosphering_speed  
+-model  
+-name    
+-passengers  
+-films  
+-pilots  
+-starship_class  
+-url  
+}  
+  
+For now I only use the names of the spaceships from this api, but in the future I might use this api to to change the max speed of the spaceshipt to that of the hyperdrive_rating of the spaceship of the api.  
 
 #### Database
 ...
 
 #### Socket IO rooms
-...
+Each room can have a maximum of two players. Each time a new player joins the server checks if there is already a room with a player 1 but without a player 2. If so, that new player joins as player 2. If not the new player generates its own room and waits for other players.
 
 ### Roadmap
 * Demo the app online
