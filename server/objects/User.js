@@ -23,6 +23,10 @@ class User {
         return this.velocity;
     }
 
+    getMaxSpeed(){
+        return this.maxSpeed;
+    }
+
     setX(x){
         this.x = x;
     }
@@ -45,6 +49,14 @@ class User {
 
     hasVelocity(){
         return this.velocity != 0;
+    }
+
+    setVelocity(velocity){
+        this.velocity = velocity;
+    }
+
+    setMaxSpeed(maxSpeed){
+        this.maxSpeed = maxSpeed;
     }
 }
 

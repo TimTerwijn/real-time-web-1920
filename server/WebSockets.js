@@ -5,9 +5,11 @@ const { v4: uuidv4 } = require('uuid');
 const User = require("../server/objects/User.js");
 const Room = require("../server/objects/Room.js");
 const starwarsApi = require("../server/StarwarsApi.js");
+const db = require("../server/Database.js");
 
 //all users
 const users = {};
+db.selectAllUsers(users);
 
 function set(io){
     //global room
@@ -38,6 +40,9 @@ function set(io){
             //share starships
             const starships = starwarsApi.getStarships();
             socket.emit('store-starships', starships);
+
+            // finally update the db record
+            db.insertUser(user);
         });
     
         socket.on('login', function(userId){
