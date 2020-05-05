@@ -16,8 +16,11 @@ function init(){
         //fix api key on heroku
         //https://stackoverflow.com/a/55233621
         
-        console.log("Heroku api does not work, yet...");
-        apiKey = "DEMO_KEY";
+        _host = process.env.db_host;
+        _user = process.env.db_user;
+        _password = process.env.db_password;
+        _database = process.env.db_database;
+
     }else{//user is on localhost
         _host = databaseLogin.host;
         _user = databaseLogin.user;

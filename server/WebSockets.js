@@ -9,6 +9,7 @@ const db = require("../server/Database.js");
 
 //all users
 const users = {};
+//fill users from database
 db.selectAllUsers(users);
 
 function set(io){
