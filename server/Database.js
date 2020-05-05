@@ -9,23 +9,22 @@ let _database;
 
 function init(){
     //get login data
-    const databaseLogin = require("./DatabaseLogin.js");
 
-    //check if on heroku
-    if(databaseLogin == null){
-        //fix api key on heroku
+    try{
+        //if user is on localhost
+        const databaseLogin = require("./DatabaseLogin.js");
+        _host = databaseLogin.host;
+        _user = databaseLogin.user;
+        _password = databaseLogin.password;
+        _database = databaseLogin.database;
+    }catch(error){
+        //if user is on heroku
         //https://stackoverflow.com/a/55233621
         
         _host = process.env.db_host;
         _user = process.env.db_user;
         _password = process.env.db_password;
         _database = process.env.db_database;
-
-    }else{//user is on localhost
-        _host = databaseLogin.host;
-        _user = databaseLogin.user;
-        _password = databaseLogin.password;
-        _database = databaseLogin.database;
     }
 }
 
