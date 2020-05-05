@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, '/client/views'));
 
 //set port listener 
 const server = app.listen(process.env.PORT || 3000, function(){
-    console.log(`Our app is running on port ${ PORT }`);
+    console.log(`Our app is running on port 3000!`);
 });
 
 //routes
