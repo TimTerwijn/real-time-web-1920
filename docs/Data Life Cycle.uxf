@@ -190,7 +190,7 @@ GET starships (Fetch)</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-GET index.ejs (EJS)</panel_attributes>
+return index.ejs (EJS)</panel_attributes>
     <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
   </element>
   <element>
@@ -214,7 +214,7 @@ player1 on left (SocketIO)</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-Broadcast new X coordinate of Harry</panel_attributes>
+Broadcast new X coordinate of Player1</panel_attributes>
     <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
   </element>
   <element>
@@ -286,5 +286,17 @@ Set player sprite (SocketIO)</panel_attributes>
     <panel_attributes>lt=&lt;&lt;-
 Set player sprite (SocketIO)</panel_attributes>
     <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>410</y>
+      <w>310</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+GET spaceinvaders.io</panel_attributes>
+    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
