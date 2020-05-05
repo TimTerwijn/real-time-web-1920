@@ -7,7 +7,6 @@ class Room {
         this.name = name;
         this.user1 = newUser;
         this.user2 = null;
-        this.bull
 
         //start async gameloop
         gameloop.start(this)
@@ -83,10 +82,6 @@ class Room {
         } 
 
         return hasVelocity > 0;
-    }
-
-    shoot(ShootingUser){
-        
     }
 }
 
