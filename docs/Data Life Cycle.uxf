@@ -4,21 +4,31 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1290</x>
-      <y>140</y>
+      <x>1200</x>
+      <y>250</y>
       <w>210</w>
-      <h>280</h>
+      <h>360</h>
     </coordinates>
-    <panel_attributes>Nasa Api
+    <panel_attributes>Starwars Api
 --
-picture of the day{
-  copyright
-  date
-  explanation (a story)
-  hdurl
-  media_type
-  service_version
-  title
+Starships{
+  MGLT
+  cargo_capacity
+  consumables
+  cost_in_credits
+  created
+  crew
+  edited
+  hyperdrive_rating
+  length
+  manufacturer
+  max_atmosphering_speed
+  model
+  name
+  passengers
+  films
+  pilots
+  starship_class
   url
 }</panel_attributes>
     <additional_attributes/>
@@ -26,13 +36,31 @@ picture of the day{
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>140</y>
+      <x>40</x>
+      <y>50</y>
       <w>340</w>
-      <h>370</h>
+      <h>820</h>
     </coordinates>
-    <panel_attributes>Server Side (Harry Potter)
+    <panel_attributes>Client Side
 --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -48,35 +76,71 @@ userID : "4f8330e6-5093-4755-884d-886fc6a24ecc"
 
 
 
-myX: 123
-hisX: 453</panel_attributes>
+Sprite selection menu onclick()
+
+HTML img src = "x-wing.png"
+
+On left arrow()
+
+
+
+
+HTML img css left = x
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>690</x>
-      <y>140</y>
+      <x>660</x>
+      <y>50</y>
       <w>380</w>
-      <h>460</h>
+      <h>820</h>
     </coordinates>
-    <panel_attributes>Client Side
+    <panel_attributes>Server Side
 --
 
-Get picture of the day and store it.
+Get users from database, store them in ram
+
+users[
+  user{
+    id,
+    username,
+    x,
+    velocity,
+    maxSpeed,
+    sprite,
+  }
+]
+
+Get starships, use name and image and store them in ram:
+
+starships[
+  starship{
+    "name" : "x-wing",
+    "img" : "/client/public/img/players/x-wing",
+  }
+]
 
 Page request, return html + picture of the day
 
 
-Receive username, return a unique ID and store both.
+Receive username, create room and return a unique ID
 
-users{
-  "4f8330e6-5093-4755-884d-886fc6a24ecc": "Harry Potter",
-  "7i3474a9-1292-2571-s723-395fd3s65hds": "Tim Terwijn",
+room{
+  name,
+  user1,
+  user2,
 }
 
+Save sprite in room, then broadcast to players,
 
-Broadcast new coordinate to other users.
+
+
+
+Set velocity of room1.player1 to its max speed (8)
+Gameloop will update player 1 x location
+Broadcast new x location of player 1 to all players in room1
 
 </panel_attributes>
     <additional_attributes/>
@@ -84,20 +148,20 @@ Broadcast new coordinate to other users.
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>240</y>
+      <x>370</x>
+      <y>470</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-username (SocketIO)</panel_attributes>
+Create account / login (SocketIO)</panel_attributes>
     <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>290</y>
+      <x>370</x>
+      <y>490</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -108,65 +172,119 @@ user ID (SocketIO)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1060</x>
-      <y>160</y>
-      <w>250</w>
+      <x>1030</x>
+      <y>270</y>
+      <w>190</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-GET picture of the day (Fetch)</panel_attributes>
-    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+GET starships (Fetch)</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>210</y>
+      <x>370</x>
+      <y>430</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-GET picture of the day (EJS)</panel_attributes>
+GET index.ejs (EJS)</panel_attributes>
     <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>380</y>
+      <x>370</x>
+      <y>670</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-New X coordinate of Harry (SocketIO)</panel_attributes>
+player1 on left (SocketIO)</panel_attributes>
     <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>730</y>
+      <w>310</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Broadcast new X coordinate of Harry</panel_attributes>
+    <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>520</y>
-      <w>340</w>
-      <h>90</h>
+      <x>1200</x>
+      <y>50</y>
+      <w>210</w>
+      <h>190</h>
     </coordinates>
-    <panel_attributes>Server Side (Tim Terwijn)
+    <panel_attributes>Database
 --
-User ID : "7i3474a9-1292-2571-s723-395fd3s65hds"
-
-myX: 453
-hisX: 123</panel_attributes>
+users[
+  user{
+    id,
+    username,
+    x,
+    velocity,
+    maxSpeed,
+    sprite,
+  }
+]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>420</y>
-      <w>310</w>
-      <h>180</h>
+      <x>1030</x>
+      <y>70</y>
+      <w>190</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-Broadcast new X coordinate of Harry</panel_attributes>
-    <additional_attributes>10.0;160.0;50.0;160.0;50.0;10.0;290.0;10.0</additional_attributes>
+users (query)</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1030</x>
+      <y>80</y>
+      <w>450</w>
+      <h>620</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Update database (query)</panel_attributes>
+    <additional_attributes>380.0;10.0;430.0;10.0;430.0;600.0;100.0;600.0;100.0;420.0;10.0;420.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>600</y>
+      <w>310</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Set player sprite (SocketIO)</panel_attributes>
+    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>620</y>
+      <w>310</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Set player sprite (SocketIO)</panel_attributes>
+    <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
   </element>
 </diagram>
