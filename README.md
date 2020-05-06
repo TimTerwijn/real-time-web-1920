@@ -38,8 +38,7 @@ I want to make a space invader versus game for two players.
 *The sprite of the player will change when he presses on a starship image. The client sends the starship to the server, and broadcast it to all the players in the room.
 
 ## API
-I made use of the [Starwars API](https://swapi.dev/), the Starwars api is used to get the data of the starships.
-For now I only use the names of the spaceships from this API, but in the future I might use this API to change the max speed of the spaceship to that of the hyperdrive_rating of the spaceship of the API.
+I made use of the [Starwars API](https://swapi.dev/), the Starwars api is used to get the data of the starships. This is a nice api because I do not need an api key. For now I only use the names of the spaceships from this API, but in the future I might use this API to change the max speed of the spaceship to that of the hyperdrive_rating of the spaceship of the API.
 
 ![api](/docs/api.png)
 
