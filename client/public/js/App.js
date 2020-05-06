@@ -162,7 +162,7 @@ export{
     onLeftKeyUp,
     onRightKeyDown,
     onRightKeyUp,
-    onSpace,
+    // onSpace,
 }
 
 init();
