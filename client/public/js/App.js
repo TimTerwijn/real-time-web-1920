@@ -109,9 +109,9 @@ function onRightKeyUp(){
     }
 }
 
-function onSpace(){
-    socket.emit('on-space');
-}
+// function onSpace(){
+//     socket.emit('on-space');
+// }
 
 socket.on("emitPlayerX", function(playerCoordinates){
     const player1X = playerCoordinates.player1X;

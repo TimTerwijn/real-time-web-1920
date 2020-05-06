@@ -71,7 +71,7 @@ Starships{
 
 
 userID : "4f8330e6-5093-4755-884d-886fc6a24ecc"
-
+Use sprites in sprite selection menu
 
 
 
@@ -166,7 +166,7 @@ Create account / login (SocketIO)</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-user ID (SocketIO)</panel_attributes>
+user ID &amp; starships (SocketIO)</panel_attributes>
     <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
   </element>
   <element>

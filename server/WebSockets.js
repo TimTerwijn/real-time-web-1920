@@ -133,15 +133,15 @@ function set(io){
             user.stopMoving();            
         });
 
-        socket.on('on-space', function(){
-            if(user == undefined || room == undefined){
-                //fix crashes
-                console.log("Error! user or room is undefined")
-                return
-            }
+        // socket.on('on-space', function(){
+        //     if(user == undefined || room == undefined){
+        //         //fix crashes
+        //         console.log("Error! user or room is undefined")
+        //         return
+        //     }
 
-            room.shoot(user);
-        });
+        //     room.shoot(user);
+        // });
 
         socket.on('set-sprite', function(sprite){
             if(user == undefined || room == undefined){
