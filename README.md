@@ -12,7 +12,7 @@ As you can see in the Week1 branch, I have been building an application to test 
 ![week1](/docs/week1.png)
 
 ## Description
-I want to make a space invader versus game for two players.
+I want to make a space invader versus game where two players can try to shoot each other from behind bunkers. The player who wins gains points for his high scores. You can also score points by shooting monsters in the middle of the screen.
 
 ## Install guide
 * Clone or download the repository $ git clone https://github.com/TimTerwijn/real-time-web-1920.git
